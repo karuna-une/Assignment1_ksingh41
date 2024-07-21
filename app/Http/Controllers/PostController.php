@@ -14,8 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        dd(Auth::user());
-        $posts = Post::all();
+        // $posts = Post::all();
+        $posts = Auth::user()->posts;
         return view('Posts.index', compact('posts'));
     }
 
@@ -45,6 +45,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+            if(Auth::id() != $post->id){
+                abort(403);
+
+            }
             return view('Posts.show',compact('post'));
     }
 
