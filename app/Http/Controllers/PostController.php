@@ -15,7 +15,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        // $posts = Auth::user()->posts;
         return view('Posts.index', compact('posts'));
     }
 
