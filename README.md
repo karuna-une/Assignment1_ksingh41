@@ -1,12 +1,14 @@
 # Blog CRUD Application
-This Project is a simple CRUD(Create, Read, Update, Delete) application for managing blog.
+This project is a simple CRUD application for managing blog. It provides fundatmentals CRUD(Create, Read, Update,Delete) functionalities, allowing users to efficiently create new blog posts, view existing posts, update contents and delete the posts. With its user-friendly interface, this project aims to simplify blog management and enhance content control for users.
 
 # SetUp and Initialize Project
 
 ### 1. Ensure Your Development Environment is Set Up
+- Install [Visual Studio Code]
 - Install [Composer]
 - Install [Laravel]
 - Install [SQLYOG]
+- Install [Node.js]
 
 ### 2. Create a GitHub Repository for Laravel Project
 - Go to [GitHub](https://github.com) and create a new repository.
@@ -54,13 +56,18 @@ Laravel makes it easy to create resource routes and these routes map the standar
 
 # Create Posts(Actions)
 ### 1. Create blade template under posts folder 
-- create.blade.php (listing posts)
-- delete.blade.php (deleting posts)
-- edit.blade.php (editing posts)
-- show.blade.php (viewing posts)
+- create.blade.php (For listing posts)
+- delete.blade.php (For deleting posts)
+- edit.blade.php (For editing posts)
+- show.blade.php (For viewing posts)
 
 # Testing
 - Test each functionality by creating, viewing, deleting and updating.
+
+# Author
+Karuna Singh
+220279765
+
 
 
 
