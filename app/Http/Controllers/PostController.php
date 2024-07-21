@@ -14,8 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::all();
-        $posts = Auth::user()->posts;
+        $posts = Post::all();
+        // $posts = Auth::user()->posts;
         return view('Posts.index', compact('posts'));
     }
 
@@ -45,10 +45,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-            if(Auth::id() != $post->id){
-                abort(403);
+            // if(Auth::id() != $post->id){
+            //     abort(403);
 
-            }
+            // }
             return view('Posts.show',compact('post'));
     }
 
@@ -57,22 +57,30 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-       //
+        return view('Posts.edit', compact('post'));
     }
+    
     
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+    
+        $post->update($request->all());
+        return redirect()->route('posts.index');
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->back();
     }
     
 }
