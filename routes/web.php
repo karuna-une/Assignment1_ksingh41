@@ -35,8 +35,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('photos', PhotoController::class);
     
     // Route for the home page after login
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [PostController::class, 'index'])->name('home');
 });
+
+Route::get('/test',[PostController::class, 'test']);
+
 
 // Authentication routes (login, registration, etc.)
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::prefix('admin')->middleware('admin')->group(function() {
+    Route::resource('users', Admin\UserController::class);
+    Route::resource('posts', Admin\PostController::class);
+});
+
+

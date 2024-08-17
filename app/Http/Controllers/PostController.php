@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class PostController extends Controller
 {
@@ -96,4 +98,11 @@ class PostController extends Controller
         // Redirect back to the previous page
         return redirect()->back();
     }
+
+    public function test()
+    {
+       $results = User::where('created_at','>', new DateTime('2024-07-21 06:28:46'))->get();
+        dd($results);
+    }
 }
+ 
