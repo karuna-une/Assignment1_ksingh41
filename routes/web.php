@@ -40,3 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 // Authentication routes (login, registration, etc.)
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
