@@ -73,6 +73,15 @@ The primary goal of this project is to build upon the fundamentals learned in th
 - Create a migration to add roles in the database.
 - Ensure only admins can access user management functionalities.
 
+# Migration and seed the database in Laravel
+- php artisan migrate
+- php artisan db:seed
+- php artisan migrate:refresh
+- Please use the below details to login users.
+    - Email address: admin@admin.com , Password: password123
+    - Email address: author@author.com, Password: password123
+    - Email address: user@user.com, Password: password123
+
 # Testing
 - Test each functionality by creating, viewing, deleting and updating.
 

@@ -32,7 +32,11 @@
     </style>
 
     <div class="container">
-
+        @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+        @endif
         
         <!-- Table displaying the list of blog posts -->
         <table>

@@ -3,6 +3,11 @@
 @section('content')
     <!-- Heading for the blog posts list -->
     <h1>Blog Posts</h1>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
     
     <!-- Link to create a new post -->
     <a href="{{ route('author.posts.create') }}" class="btn btn-primary">Create Post</a>

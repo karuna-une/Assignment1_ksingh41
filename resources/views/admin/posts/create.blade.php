@@ -6,6 +6,12 @@
     <!-- Link to go back to the previous page -->
     <a href="{{ url()->previous() }}">Back</a>
 
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+
     <!-- Form for submitting a new blog post -->
     <form action="{{ route('admin.posts.store') }}" method="POST">
         @csrf <!-- CSRF token for security -->

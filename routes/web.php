@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Route for the homepage
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Uncomment and adjust these routes as needed

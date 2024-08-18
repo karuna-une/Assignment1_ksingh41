@@ -4,6 +4,11 @@
 <div class="container">
     <!-- Heading for editing the post -->
     <h1>Edit Post</h1>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
     
     <!-- Form for updating the blog post -->
     <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">

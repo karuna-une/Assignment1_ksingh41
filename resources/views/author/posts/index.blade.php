@@ -8,6 +8,11 @@
             <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <a href="{{ route('author.posts.create') }}" class="btn btn-sm btn-outline-secondary">Create Post</a>
+                @if(session('success'))
+            <div class="alert alert-success">
+            {{ session('success') }}
+            </div>
+            @endif
             </div>
             </div>
         </div>
