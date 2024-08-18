@@ -54,12 +54,12 @@
                         <td>
                             <div class="action-buttons">
                                 <!-- Link to view the individual post -->
-                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Show</a>
+                                <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Show</a>
                                 <!-- Link to edit the post -->
-                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary">Edit</a>
+                                <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-secondary">Edit</a>
                                 
                                 <!-- Form to delete the post -->
-                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <!-- Delete button -->

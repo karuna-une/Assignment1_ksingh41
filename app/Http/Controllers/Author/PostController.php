@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -15,13 +16,13 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        // Retrieve all posts
-        $posts = Post::all();
-        
-        // Return the view with the paginated posts
-        return view('admin.posts.index', compact('posts'));
-    }
+{
+    // Retrieve all posts created by the currently authenticated user
+    $posts = Post::where('user_id', Auth::id())->get();
+
+    // Return the view with the posts
+    return view('author.posts.index', compact('posts'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +30,7 @@ class PostController extends Controller
     public function create()
     {
         // Return the view for creating a new post
-        return view('admin.posts.create');
+        return view('author.posts.create');
     }
 
     /**
@@ -46,7 +47,7 @@ class PostController extends Controller
         // Create a new post using the request data
         Post::create($request->all());
         // Redirect to the posts index page
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('author.posts.index');
     }
 
     /**
@@ -60,7 +61,7 @@ class PostController extends Controller
         // }
         
         // Return the view with the specific post details
-        return view('admin.posts.show', compact('post'));
+        return view('author.posts.show', compact('post'));
     }
 
     /**
@@ -69,7 +70,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // Return the view for editing the specified post
-        return view('admin.posts.edit', compact('post'));
+        return view('author.posts.edit', compact('post'));
     }
 
     /**
@@ -86,7 +87,7 @@ class PostController extends Controller
         // Update the post with the request data
         $post->update($request->all());
         // Redirect to the posts index page
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('author.posts.index');
     }
 
     /**

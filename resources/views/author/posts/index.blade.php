@@ -7,7 +7,7 @@
             <h1 class="h2">Blog Posts</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-outline-secondary">Create Post</a>
+                <a href="{{ route('author.posts.create') }}" class="btn btn-sm btn-outline-secondary">Create Post</a>
             </div>
             </div>
         </div>
@@ -54,12 +54,12 @@
                         <td>
                             <div class="action-buttons">
                                 <!-- Link to view the individual post -->
-                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Show</a>
+                                <a href="{{ route('author.posts.show', $post->id) }}" class="btn btn-primary">Show</a>
                                 <!-- Link to edit the post -->
-                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary">Edit</a>
+                                <a href="{{ route('author.posts.edit', $post->id) }}" class="btn btn-secondary">Edit</a>
                                 
                                 <!-- Form to delete the post -->
-                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('author.posts.destroy', $post->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <!-- Delete button -->

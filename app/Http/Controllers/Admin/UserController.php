@@ -3,60 +3,82 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        //
+        // Get all users
+        $users = User::all();
+        return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        // Show form to create a new user
+        return view('admin.users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+        'role' => 'required|string|in:user,admin,author', // Validate role
+    ]);
+
+    $validatedData['password'] = bcrypt($validatedData['password']);
+
+    User::create($validatedData);
+
+    return redirect()->route('admin.users.index')->with('success', 'User created successfully');
+}
+
+    public function show($id)
     {
-        //
+        // Show a single user
+        $user = User::findOrFail($id);
+        return view('admin.users.show', compact('user'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        // Show form to edit a user
+        $user = User::findOrFail($id);
+        return view('admin.users.edit', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+        'password' => 'nullable|string|min:8|confirmed',
+        'role' => 'required|string|in:user,admin,author', // Validate role
+    ]);
+
+    $user = User::findOrFail($id);
+
+    if ($request->filled('password')) {
+        $validatedData['password'] = bcrypt($validatedData['password']);
+    } else {
+        unset($validatedData['password']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    $user->update($validatedData);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
+}
+
+    public function destroy($id)
     {
-        //
+        // Delete the user
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
     }
 }
