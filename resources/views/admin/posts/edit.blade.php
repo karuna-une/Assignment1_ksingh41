@@ -32,6 +32,7 @@
 
         <!-- Button to submit the form and update the post -->
         <button type="submit" class="btn btn-primary">Update Post</button>
+        <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

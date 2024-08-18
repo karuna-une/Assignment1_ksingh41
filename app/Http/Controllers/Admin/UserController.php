@@ -34,7 +34,7 @@ class UserController extends Controller
 
     User::create($validatedData);
 
-    return redirect()->route('admin.users.index')->with('success', 'User created successfully');
+    return redirect()->route('admin.users.index')->with('success', 'User/Admin created successfully');
 }
 
     public function show($id)
@@ -55,7 +55,7 @@ class UserController extends Controller
 {
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+        'email' => 'required|string|email|max:255',
         'password' => 'nullable|string|min:8|confirmed',
         'role' => 'required|string|in:user,admin,author', // Validate role
     ]);
@@ -70,7 +70,7 @@ class UserController extends Controller
 
     $user->update($validatedData);
 
-    return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
+    return redirect()->route('admin.users.index')->with('success', 'User/Admin updated successfully');
 }
 
     public function destroy($id)
@@ -79,6 +79,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('admin.users.index')->with('success', 'User/Admin deleted successfully');
     }
 }

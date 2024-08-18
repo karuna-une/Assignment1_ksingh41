@@ -40,17 +40,15 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::prefix('admin')->middleware('admin')->group(function() {
-    Route::resource('posts', Admin\AuthorController::class);
-    Route::resource('users', Admin\UserController::class);
-    Route::resource('posts', Admin\PostController::class);
-});
+// Route::prefix('admin')->middleware('admin')->group(function() {
+//     Route::resource('users', Admin\UserController::class);
+//     Route::resource('posts', Admin\PostController::class);
+// });
 
 
 // Group routes that require authentication
 Route::group(['middleware' => ['auth','admin'], 'as' => 'admin.', 'prefix' => 'admin'], function () {
     // Resource routes for posts (CRUD operations)
-    Route::resource('author', AuthorController::class);
     Route::resource('posts', AdminPostController::class);
     Route::resource('users', UserController::class);
     
@@ -60,8 +58,6 @@ Route::group(['middleware' => ['auth','admin'], 'as' => 'admin.', 'prefix' => 'a
     // Route for the home page after login
     Route::get('/home', [PostController::class, 'index'])->name('home');
 });
-
-
 
 
 Route::group(['middleware' => ['auth'], 'as' => 'author.', 'prefix' => 'author'], function () {

@@ -1,5 +1,8 @@
-# Blog CRUD Application
-This project is a simple CRUD application for managing blog. It provides fundatmentals CRUD(Create, Read, Update,Delete) functionalities, allowing users to efficiently create new blog posts, view existing posts, update contents and delete the posts. With its user-friendly interface, this project aims to simplify blog management and enhance content control for users.
+# Blog Application with Authentication and Admin Panel
+This project extends the basic CRUD application for managing a blog by adding user authentication and an admin panel. The enhancements include the implementation of role-based access control, allowing admins to manage users and blog posts, and authors to manage their posts.
+
+# Objective
+The primary goal of this project is to build upon the fundamentals learned in the initial blog application and introduce new features, such as user authentication and an admin panel, to create a more robust application.
 
 # SetUp and Initialize Project
 
@@ -9,60 +12,72 @@ This project is a simple CRUD application for managing blog. It provides fundatm
 - Install [Laravel]
 - Install [SQLYOG]
 - Install [Node.js]
+- Install [MongoDB]
 
 ### 2. Create a GitHub Repository for Laravel Project
-- Go to [GitHub](https://github.com) and create a new repository.
-
-### 3. Create a New Laravel Project and Set Up Version Control with Git and GitHub
-
-- composer create-project laravel/laravel Assignment1_ksingh41
-- composer global require laravel/installer
-- Open Command Prompt
-- cd laragon\www\Assignment1_ksingh41
-- git init
-- git remote add origin https://github.com/karuna-une/Assignment1_ksingh41
-- git add .
-- git commit -m "Initial commit"
-- git push -u origin master
-
-# Create Database and Configure Laravel
-- Create database name in SQLYOG 
-- Configure the .env File with Database Details
+- Go to [GitHub](https://github.com) and open previous repository.
+- Clone the repository and create a new branch for this feature:
+   git checkout -b feature/auth-admin-panel
 
 
-# Route
-### 1. Resource Routes for Posts in 'wep.php'
-Laravel makes it easy to create resource routes and these routes map the standard CRUD operations to controller actions.
-- Route::resource('posts',PostController::class);
-- Route::resource('photos',PhotoController::class);
+# Setup MongoDB with Laravel
+- Follow the steps from Lecture 4 to configure MongoDB with Laravel.
+- Update the .env file with MongoDB connection details.
 
-# Post Controller and Photo Controller
-### 1. Generate PostController and implement CRUD operations
-- Edit the generated controller app/Http/Controllers/PostController.php to implement CRUD operations (index, create, store, show, edit, update, destroy)
-- php artisan make:controller PostController --resource
+# Install Laravel UI and Setup Authentication
 
-# Models and Migrations
-### 1. Generate the Post Model and Create the Migration for the Posts Table\
-- php artisan make:model Post -m
+### 1. Install Laravel UI package
+- composer require laravel/ui
 
-### 2. Migration to setup the database table
-- php artisan migrate
+### 2. Generate the authentication scaffolding
+- php artisan ui bootstrap --auth
+- npm install && npm run dev
 
-# Factory and Seeder
-### 1. Generate Post Factory and Post Seeder and Seed in Database Table
-- Factories and seeders helps to genertae the dummy data for testing and development purposes
-- php artisan make:factory PostFactory --model=Post
-- php artisan make:seeder PostSeeder
+### 3. Update the master layout to include Bootstrap styling
 
-# Create Posts(Actions)
-### 1. Create blade template under posts folder 
-- create.blade.php (For listing posts)
-- delete.blade.php (For deleting posts)
-- edit.blade.php (For editing posts)
-- show.blade.php (For viewing posts)
+# Middleware for Admin Access
+
+### 1. Generate middleware to restrict access to the admin panel
+- php artisan make:middleware AdminMiddleware
+
+### 2. Implement the middleware to check if the authenticated user is an admin
+
+### 3. Apply the middleware to the admin routes.
+
+
+# Admin routes
+### 1. Define routes in web.php for the admin panel with an Admin prefix
+- Route::group(['middleware' => ['auth','admin'], 'as' => 'admin.', 'prefix' => 'admin'], function () {
+    // Resource routes for posts (CRUD operations)
+    Route::resource('posts', AdminPostController::class);
+    Route::resource('users', UserController::class);
+
+- Ensure the routes are protected by the AdminMiddleware
+
+# Create Admin Controllers
+### 1. Generate controllers for managing users and blog posts
+- php artisan make:controller Admin/UserController
+- php artisan make:controller Admin/PostController
+
+### 2. Implement CRUD operations in the respective controllers with appropriate validation
+
+# Create Blade Views for Admin Panel
+- Download Bootstrap examples from Bootstrap and use the dashboard template as the landing page.
+- Create a new layout for the admin panel
+- resources/views/layouts/admin.blade.php
+- Create views for listing, creating, editing, and deleting users and blog posts, ensuring consistency with the Bootstrap theme.
+
+# Enhance User Management
+- Add roles to users (e.g., admin, author, user) and implement role-based access control.
+- Update the registration process to allow assigning roles.
+- Create a migration to add roles in the database.
+- Ensure only admins can access user management functionalities.
 
 # Testing
 - Test each functionality by creating, viewing, deleting and updating.
+
+# GitHub Push
+- Version-controlled and pushed to GitHub after each major step
 
 # Author
 Karuna Singh

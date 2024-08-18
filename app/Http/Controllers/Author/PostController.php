@@ -43,12 +43,18 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
         ]);
-
-        // Create a new post using the request data
-        Post::create($request->all());
+    
+        // Create a new post with the user_id of the logged-in user
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => auth()->id(), // Store the logged-in user's ID
+        ]);
+    
         // Redirect to the posts index page
-        return redirect()->route('author.posts.index');
+        return redirect()->route('author.posts.index')->with('success', 'Post created successfully');
     }
+    
 
     /**
      * Display the specified resource.

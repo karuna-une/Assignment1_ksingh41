@@ -21,5 +21,6 @@
         </div>
         <!-- Submit button for the form -->
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 @endsection

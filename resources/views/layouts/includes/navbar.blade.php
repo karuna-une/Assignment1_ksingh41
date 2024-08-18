@@ -5,26 +5,32 @@
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('admin.posts.index')}}">
-                <svg class="bi"><use xlink:href="#house-fill"/></svg>
-                Posts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.users.index')}}">
-                <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-                Users
-              </a>
-            </li>  
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="{{ route('author.posts.index')}}">
-                <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-                Author
-              </a>
-            </li>  
-          </ul>
+        <ul class="nav flex-column">
+    @if(Auth::user()->role === 'admin')
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('admin.posts.index') }}">
+            <svg class="bi"><use xlink:href="#house-fill"/></svg>
+            Posts
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.users.index') }}">
+            <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+            Users
+        </a>
+    </li>
+    @endif
+    
+    @if(Auth::user()->role === 'author')
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('author.posts.index') }}">
+            <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+            Blog
+        </a>
+    </li>
+    @endif
+</ul>
+
 
           <hr class="my-3">
 

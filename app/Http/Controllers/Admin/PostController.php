@@ -46,7 +46,7 @@ class PostController extends Controller
         // Create a new post using the request data
         Post::create($request->all());
         // Redirect to the posts index page
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('success', 'Post created successfully');
     }
 
     /**
@@ -86,7 +86,7 @@ class PostController extends Controller
         // Update the post with the request data
         $post->update($request->all());
         // Redirect to the posts index page
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully');
     }
 
     /**
@@ -96,8 +96,10 @@ class PostController extends Controller
     {
         // Delete the specified post
         $post->delete();
-        // Redirect back to the previous page
-        return redirect()->back();
+        // // Redirect back to the previous page
+        // return redirect()->back();
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully');
     }
 
     public function test()
