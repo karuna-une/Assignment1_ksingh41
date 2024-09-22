@@ -7,7 +7,7 @@
     <a href="{{ url()->previous() }}">Back</a>
 
     <!-- Form for submitting a new blog post -->
-    <form action="{{ route('posts.store') }}" method="POST">
+    <form action="{{ route('admin.posts.store') }}" method="POST">
         @csrf <!-- CSRF token for security -->
         <div class="form-group">
             <!-- Input field for the post title -->
