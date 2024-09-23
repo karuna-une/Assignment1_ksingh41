@@ -6,7 +6,10 @@ use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Author\PostController as AuthorPostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PhotoController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,10 +60,14 @@ Route::group(['middleware' => ['auth','admin'], 'as' => 'admin.', 'prefix' => 'a
     
     // Route for the home page after login
     Route::get('/home', [PostController::class, 'index'])->name('home');
+
 });
 
 
 Route::group(['middleware' => ['auth'], 'as' => 'author.', 'prefix' => 'author'], function () {
     // Resource routes for posts (CRUD operations)
     Route::resource('posts', AuthorPostController::class);
-});
+
+ });
+
+
