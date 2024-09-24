@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use App\Http\Controllers\DateTime;
 
 class PostController extends Controller
 {
@@ -101,7 +102,7 @@ class PostController extends Controller
 
     public function test()
     {
-       $results = User::where('created_at','>', new DateTime('2024-07-21 06:28:46'))->get();
+       $results = User::where('created_at','>', now()->subYears(2))->get();
         dd($results);
     }
 }

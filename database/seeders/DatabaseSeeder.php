@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             // Create Admin User
         \App\Models\User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'admin@admin.com',
+            'email' => 'admin12@admin.com',
             'password' => Hash::make('password123'), // Set the password
             'role' => 'admin', // Assign the role
         ]);
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         // Create Author User
         \App\Models\User::factory()->create([
             'name' => 'Author User',
-            'email' => 'author@author.com',
+            'email' => 'author12@author.com',
             'password' => Hash::make('password123'), // Set the password
             'role' => 'author', // Assign the role
         ]);
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         // Create Regular User
         \App\Models\User::factory()->create([
             'name' => 'Regular User',
-            'email' => 'user@user.com',
+            'email' => 'user12@user.com',
             'password' => Hash::make('password123'), // Set the password
             'role' => 'user', // Assign the role
         ]);
